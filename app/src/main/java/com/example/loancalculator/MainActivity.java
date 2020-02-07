@@ -10,6 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText downBox;
     private EditText aprBox;
     private CheckBox leaseBox;
-   // private CheckBox loanBox;
     private TextView barLabel;
     private SeekBar seekBar;
     private TextView monthlyBox;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         leaseBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                
+
             }
         });
 
@@ -71,22 +71,51 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void loan(View v){
-       String inputm = aprBox.getText().toString();
-       String inputcost = priceBox.getText().toString();
-       String inputdown = downBox.getText().toString();
-       String inputbar = barLabel.getText().toString();
+    public void loan(View v) {
 
-       double label = Double.parseDouble(inputbar);
-       double mr = (Double.parseDouble(inputm)/100) / 12;
-       double loan = Double.parseDouble(inputcost) - Double.parseDouble(inputdown);
 
-       double pay = mr*loan / (1 -(1+Math.pow(mr,(-1*label))));
+        if (!leaseBox.isChecked()) {
 
-       monthlyBox.setText(String.format("%.2f", pay));
+            String inputm = aprBox.getText().toString();
+            String inputcost = priceBox.getText().toString();
+            String inputdown = downBox.getText().toString();
+            String inputbar = barLabel.getText().toString();
 
+            if (inputcost.length() > 0) {
+                double label = Double.parseDouble(inputbar);
+                double mr = (Double.parseDouble(inputm) / 100) / 12;
+                double loan = Double.parseDouble(inputcost) - Double.parseDouble(inputdown);
+
+                double pay = mr * loan / (1 - (Math.pow(1+mr, (-1 * label))));
+
+                monthlyBox.setText(String.format("%.2f", pay));
+
+            } else {
+
+
+                Toast.makeText(this,"No Purchase price entered.", Toast.LENGTH_SHORT).show();
+            }
+            }else{
+
+            String inputm = aprBox.getText().toString();
+            String inputcost = priceBox.getText().toString();
+            String inputdown = downBox.getText().toString();
+
+
+            double lease = Double.parseDouble(inputcost)/3.0;
+            double label = 36.0;
+            double mr = (Double.parseDouble(inputm) / 100) / 12;
+            double loan = lease - Double.parseDouble(inputdown);
+
+            double pay = mr * loan / (1 - (Math.pow(1+mr, (-1 * label))));
+
+            monthlyBox.setText(String.format("%.2f", pay));
+
+
+
+
+        }
+
+
+        }
     }
-
-
-
-}

@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/aprBox"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -93,6 +93,7 @@
         android:layout_marginStart="156dp"
         android:layout_marginLeft="156dp"
         android:layout_marginTop="4dp"
+        android:checked="true"
         android:shadowColor="#034877"
         android:text="Lease"
         android:textColor="@color/colorPrimaryDark"
@@ -145,10 +146,11 @@
         android:id="@+id/barLabel"
         android:layout_width="81dp"
         android:layout_height="23dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="132dp"
         android:layout_marginRight="132dp"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="439dp" />
+        app:layout_constraintTop_toBottomOf="@+id/aprBox" />
 
     <EditText
         android:id="@+id/monthlyBox"
@@ -182,7 +184,7 @@
         app:layout_constraintTop_toBottomOf="@+id/leaseBox" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/aprBox"
         android:layout_width="186dp"
         android:layout_height="52dp"
         android:layout_marginTop="28dp"
